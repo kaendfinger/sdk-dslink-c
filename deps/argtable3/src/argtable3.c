@@ -70,6 +70,8 @@
 extern "C" {
 #endif
 
+#undef EOVERFLOW
+
 enum
 {
     EMINCOUNT = 1,

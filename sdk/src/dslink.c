@@ -603,6 +603,8 @@ void dslink_async_run(uv_async_t *async_handle) {
     }
 }
 
+void bzero(void *s, size_t n) { memset(s, 0, n); }
+
 int dslink_init(int argc, char **argv,
                 const char *name, uint8_t isRequester,
                 uint8_t isResponder, DSLinkCallbacks *cbs) {

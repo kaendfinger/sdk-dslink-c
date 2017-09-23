@@ -75,7 +75,7 @@ include(ExternalProject)
 
 ##### Configure Flags #####
 
-ADD_C_FLAGS("-std=gnu99")
+ADD_C_FLAGS("-std=gnu11")
 ADD_C_FLAGS("-Wno-tautological-compare")
 
 if (NOT NO_WARNINGS)
@@ -86,6 +86,10 @@ endif()
 
 if (${CMAKE_C_COMPILER_ID} STREQUAL "Clang")
     ADD_C_FLAGS("-Qunused-arguments")
+endif()
+
+if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
+    ADD_C_FLAGS("-fomit-frame-pointer")
 endif()
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
@@ -222,6 +226,18 @@ install(DIRECTORY "sdk/include/" DESTINATION "${DSLINK_INSTALL_INCLUDE_DIR}" COM
 install(DIRECTORY "deps/mbed/include/" DESTINATION "${DSLINK_INSTALL_INCLUDE_DIR}" COMPONENT dev)
 install(DIRECTORY "deps/wslay/include/" DESTINATION "${DSLINK_INSTALL_INCLUDE_DIR}" COMPONENT dev)
 install(DIRECTORY "deps/jansson/include/" DESTINATION "${DSLINK_INSTALL_INCLUDE_DIR}" COMPONENT dev)
+
+install(TARGETS jansson
+        EXPORT jansson-targets
+        LIBRARY DESTINATION "${DSLINK_INSTALL_LIB_DIR}" COMPONENT lib
+        ARCHIVE DESTINATION "${DSLINK_INSTALL_LIB_DIR}" COMPONENT lib
+        RUNTIME DESTINATION "${DSLINK_INSTALL_BIN_DIR}" COMPONENT lib)
+
+install(TARGETS libuv
+        EXPORT libuv-targets
+        LIBRARY DESTINATION "${DSLINK_INSTALL_LIB_DIR}" COMPONENT lib
+        ARCHIVE DESTINATION "${DSLINK_INSTALL_LIB_DIR}" COMPONENT lib
+        RUNTIME DESTINATION "${DSLINK_INSTALL_BIN_DIR}" COMPONENT lib)
 
 ####### Configure Broker #######
 
