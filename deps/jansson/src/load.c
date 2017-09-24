@@ -1006,7 +1006,7 @@ json_t *json_loadf(FILE *input, size_t flags, json_error_t *error)
     const char *source;
     json_t *result;
 
-    if(input == stdin)
+    if(input == 0)
         source = "<stdin>";
     else
         source = "<stream>";

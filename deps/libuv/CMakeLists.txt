@@ -81,6 +81,17 @@ else()
             "${LIBUV_SRC_DIR}/unix/proctitle.c"
             "${LIBUV_SRC_DIR}/unix/pthread-barrier.c"
         )
+    elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Android")
+      set(LIBUV_SRC "${LIBUV_SRC}"
+          "${LIBUV_SRC_DIR}/unix/android-ifaddrs.c"
+          "${LIBUV_SRC_DIR}/unix/linux-core.c"
+          "${LIBUV_SRC_DIR}/unix/linux-inotify.c"
+          "${LIBUV_SRC_DIR}/unix/linux-syscalls.c"
+          "${LIBUV_SRC_DIR}/unix/proctitle.c"
+          "${LIBUV_SRC_DIR}/unix/pthread-fixes.c"
+          "${LIBUV_SRC_DIR}/unix/pthread-barrier.c"
+      )
+      add_definitions(-D__ANDROID__ -D__ANDROID_API__=18)
     endif()
 endif()
 

@@ -270,3 +270,7 @@ if (DSLINK_BUILD_EXAMPLES)
         target_link_libraries(${example} sdk_dslink_c-static)
     endforeach()
 endif()
+
+if (CMAKE_SYSTEM_NAME MATCHES "Android")
+  ADD_C_FLAGS("-pthread")
+endif()
