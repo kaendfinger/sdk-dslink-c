@@ -91,7 +91,7 @@ else()
           "${LIBUV_SRC_DIR}/unix/pthread-fixes.c"
           "${LIBUV_SRC_DIR}/unix/pthread-barrier.c"
       )
-      add_definitions(-D__ANDROID__ -D__ANDROID_API__=18)
+      add_definitions(-D__ANDROID__ -D__ANDROID_API__=18 -DHAVE_PTHREAD_COND_TIMEDWAIT_MONOTONIC)
     endif()
 endif()
 
